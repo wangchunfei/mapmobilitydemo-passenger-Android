@@ -5,11 +5,14 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.map.mobility.passenger"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi'
+        }
     }
     buildTypes {
         release {
@@ -26,4 +29,23 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // 腾讯地图sdk
+    implementation 'com.tencent.map:sdk-compat-v4:4.2.9'
+    implementation 'com.tencent.map:tencent-map-vector-sdk:4.2.9'
+    // 定位
+    implementation files('libs/TencentLocationSDK_v8.4.7_rdb41b51d_20190906_163315_release.jar')
+    // 推荐上车点
+    implementation files('libs/pickupspot_1.0.0.1_release.aar')
+    // 周边车辆
+    implementation files('libs/tencentcarpreview_1.0.0.1_release.aar')
+    // 检索sdk
+    implementation('com.tencent.map:tencent-navi-search:1.0.0.2') { exclude group: 'com.android.support' }
+    // 基础库
+    implementation 'com.tencent.map:tencent-map-nav-surport:1.0.0.7-SNAPSHOT'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    // 沉浸式状态栏
+    implementation 'com.gyf.immersionbar:immersionbar:2.3.1'
 }

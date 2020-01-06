@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <com.tencent.map.carpreview.ui.TencentCarsMap
+        android:id="@+id/cars_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:map_top_ratio="0.5" />
+
+</LinearLayout>
