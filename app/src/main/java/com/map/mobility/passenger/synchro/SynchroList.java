@@ -1,4 +1,4 @@
-package com.map.mobility.passenger.spot;
+package com.map.mobility.passenger.synchro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,11 @@ import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.R;
 import com.map.mobility.passenger.utils.ToastUtils;
 
-public class SpotList extends BaseActivity {
+public class SynchroList extends BaseActivity {
 
-    static final int TYPE_UI = 0;// default ui
+    static final int TYPE_CAR_ANIMA_ERASE = 0;// 小车平滑和路线擦除
 
-    static final int TYPE_MARKER = 1;// marker
+    static final int TYPE_ROUTE_TRAFFIC = 1;// 路况线
 
     private RecyclerView recyclerView;
 
@@ -48,7 +48,7 @@ public class SpotList extends BaseActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
-        recyclerView.setAdapter(new SpotRecy(new SpotRecy.IClickListener() {
+        recyclerView.setAdapter(new SynchroRecy(new SynchroRecy.IClickListener() {
             @Override
             public void onClick(int itemPosition) {
 
@@ -60,11 +60,11 @@ public class SpotList extends BaseActivity {
 
     private void click(int position) {
         switch (position){
-            case TYPE_UI:
-                toIntent(SpotBaseUi.class);
+            case TYPE_CAR_ANIMA_ERASE:
+                toIntent(SynchroCarAnima.class);
                 break;
-            case TYPE_MARKER:
-                ToastUtils.INSTANCE().Toast("待添加");
+            case TYPE_ROUTE_TRAFFIC:
+                toIntent(SychroTraffic.class);
                 break;
         }
     }

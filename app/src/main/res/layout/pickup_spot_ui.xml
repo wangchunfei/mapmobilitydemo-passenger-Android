@@ -9,13 +9,6 @@
         android:layout_height="match_parent"
         />
 
-    <Button
-        android:id="@+id/clear_marker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="changeUi"
-        android:text="change" />
-
     <com.tencent.recommendspot.ui.PointMarkerView
         android:id="@+id/point_marker"
         android:layout_width="wrap_content"

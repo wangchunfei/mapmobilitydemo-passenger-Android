@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.map.mobility.passenger">
 
+    <!-- 腾讯地图 SDK 要求的权限(开始) -->
+    <!-- 访问网络获取地图服务 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 检查网络可用性 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 访问WiFi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 需要外部存储写权限用于保存地图缓存 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 获取 device id 辨别设备 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 获取日志读取权限，帮助我们提高地图 sdk 稳定性 -->
+    <uses-permission android:name="android.permission.READ_LOGS" /> <!-- 腾讯地图 SDK 要求的权限(结束) -->
+    <!-- 通过GPS得到精确位置 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 通过网络得到粗略位置 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 访问WiFi状态，需要WiFi信息用于网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 修改WiFi状态，发起WiFi扫描, 需要WiFi信息用于网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 访问网络状态, 检测网络的可用性，需要网络运营商相关信息用于网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +25,53 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <!-- 导航地图的key-->
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="xxx" />
+        <!-- 司乘同显的key-->
+        <meta-data
+            android:name="com.tencent.map.locussynchro.api_key"
+            android:value="xxx" />
+        <meta-data
+            android:name="com.tencent.map.carpreview.api_key"
+            android:value="xxx" /> <!-- 也只需注册com.tencent.map.recospot.api_key，大型枢纽的key默认会使用这个 -->
+        <meta-data
+            android:name="com.tencent.map.recospot.api_key"
+            android:value="xxx" />
+        <meta-data
+            android:name="com.tencent.map.subhub.api.key"
+            android:value="xxx" />
+        <meta-data
+            android:name="com.tencent.map.hub.api.key"
+            android:value="xxx" /> <!-- 也只需注册 com.tencent.map.geo.api.key，逆地理编码默认会使用这个 -->
+        <meta-data
+            android:name="com.tencent.map.geo.api.key"
+            android:value="xxx" />
+        <meta-data
+            android:name="com.tencent.map.regeo.api.key"
+            android:value="xxx" />
+
+        <activity android:name=".mainlist.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".nearbycar.NearbyCarUi"/>
+
+        <activity android:name=".spot.SpotList"/>
+
+        <activity android:name=".spot.SpotBaseUi"/>
+
+        <activity android:name=".synchro.SynchroCarAnima"/>
+
+        <activity android:name=".synchro.SynchroList"/>
+
+        <activity android:name=".synchro.SychroTraffic"/>
+
     </application>
 
 </manifest>

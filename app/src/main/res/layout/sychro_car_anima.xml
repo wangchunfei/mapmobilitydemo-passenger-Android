@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tencent.tencentmap.mapsdk.maps.MapView
+        android:id="@+id/spot_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <Button
+        android:id="@+id/clear_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="start"
+        android:text="开始" />
+
+    <Button
+        android:id="@+id/btn_erase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="erase"
+        android:text="擦除效果" />
+
+    <Button
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="158dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="stop"
+        android:text="结束" />
+
+</RelativeLayout>

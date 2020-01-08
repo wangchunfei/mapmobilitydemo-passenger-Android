@@ -6,13 +6,12 @@ import android.view.View;
 import com.map.mobility.passenger.R;
 import com.tencent.map.carpreview.ui.TencentCarsMap;
 
-public class NearbyCarWithUI extends NearbyCarBase {
+public class NearbyCarUi extends NearbyCarBase {
 
     View carView;
 
     @Override
     View getNearbyCarView() {
-
         carView = LayoutInflater.from(this).inflate(R.layout.nearby_car_ui, null);
         return carView;
     }

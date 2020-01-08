@@ -132,6 +132,8 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
         if(loModel != null)
             loModel.unregister();
         loModel = null;
+        if(spotManager != null)
+            spotManager.destory();
     }
 
     private boolean checkTencentMap() {

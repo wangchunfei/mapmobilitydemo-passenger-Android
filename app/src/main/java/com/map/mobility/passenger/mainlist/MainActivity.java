@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.R;
-import com.map.mobility.passenger.nearbycar.NearbyCarWithUI;
-import com.map.mobility.passenger.spot.SpotBaseWithUI;
+import com.map.mobility.passenger.nearbycar.NearbyCarUi;
 import com.map.mobility.passenger.spot.SpotList;
+import com.map.mobility.passenger.synchro.SynchroList;
 import com.map.mobility.passenger.utils.ToastUtils;
 
 /**
@@ -106,13 +106,13 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.INSTANCE().Toast("待添加");
                 break;
             case CAR_PREVIEW:
-                toIntent(NearbyCarWithUI.class);
+                toIntent(NearbyCarUi.class);
                 break;
             case CAR_POI:
                 toIntent(SpotList.class);
                 break;
             case S_DISPLAY:
-                ToastUtils.INSTANCE().Toast("待添加");
+                toIntent(SynchroList.class);
                 break;
         }
     }

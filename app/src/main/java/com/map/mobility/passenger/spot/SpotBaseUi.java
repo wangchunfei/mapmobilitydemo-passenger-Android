@@ -7,7 +7,7 @@ import com.map.mobility.passenger.R;
 import com.tencent.recommendspot.ui.PointMarkerView;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
 
-public class SpotBaseWithUI extends SpotBase {
+public class SpotBaseUi extends SpotBase {
 
     View spotView;
 
