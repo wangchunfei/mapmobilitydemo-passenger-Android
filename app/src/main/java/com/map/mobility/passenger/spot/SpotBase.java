@@ -47,6 +47,8 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
 
         initSpot();
         getLocation();
+
+        handleSpot();
     }
 
     @Override
@@ -97,6 +99,8 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
     abstract View getNearbyCarView();
 
     abstract MapView getMap();
+
+    abstract void handleSpot();
 
     @Override
     protected void onResume() {
@@ -149,7 +153,8 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
         TMMRecommendedBoardManager.mContext = this;
 
         spotManager.getManagerConfig()
-                .isRecommendSpotDefaultUI(true);
+                .isRecommendSpotDefaultUI(true)// 使用默认上车点view
+                .isAbsorbed(true);// 允许吸附
         spotManager.getUiStyle()
                 .setMaxWordsPerLine(6);
 

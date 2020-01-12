@@ -33,6 +33,8 @@ import java.util.List;
 
 /**
  * 小车平滑和路线擦除效果
+ *
+ * @author mjzuo
  */
 public class SynchroCarAnima extends SynchroBase {
 
