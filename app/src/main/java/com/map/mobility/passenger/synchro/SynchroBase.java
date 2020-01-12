@@ -6,13 +6,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.map.mobility.passenger.BaseActivity;
+import com.map.mobility.passenger.MapBase;
 import com.tencent.map.locussynchro.TencentLocusSynchro;
 import com.tencent.map.locussynchro.model.Order;
 import com.tencent.map.locussynchro.model.PassengerSynchroOptions;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
 
-public abstract class SynchroBase extends BaseActivity {
+public abstract class SynchroBase extends MapBase {
 
     static final String LOG_TAG = "tag1234";
 
@@ -38,15 +38,11 @@ public abstract class SynchroBase extends BaseActivity {
 
     TencentLocusSynchro tencentLocusSynchro;
 
-    MapView mapView;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(getSychroView());
-        mapView = getMap();
-
     }
 
     @Override
@@ -81,6 +77,8 @@ public abstract class SynchroBase extends BaseActivity {
      * 司乘初始化
      */
     void synchroInit() {
+        if(tencentLocusSynchro != null)
+            return;
         PassengerSynchroOptions passengerOptions = new PassengerSynchroOptions();
         passengerOptions.setAccountId(passengerId);
         tencentLocusSynchro = new TencentLocusSynchro(this, passengerOptions);
@@ -106,11 +104,12 @@ public abstract class SynchroBase extends BaseActivity {
         if(tencentLocusSynchro != null) {
             tencentLocusSynchro.stop();
         }
+        tencentLocusSynchro = null;
     }
 
     abstract View getSychroView();
 
-    abstract MapView getMap();
+    protected abstract MapView getMap();
 
     abstract TencentLocusSynchro.DataSyncListener getSyncListener();
 

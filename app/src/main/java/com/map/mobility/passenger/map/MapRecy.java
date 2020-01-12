@@ -1,4 +1,4 @@
-package com.map.mobility.passenger.synchro;
+package com.map.mobility.passenger.map;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import com.map.mobility.passenger.R;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class SynchroRecy extends RecyclerView.Adapter<SynchroRecy.ViewHolder> {
+public class MapRecy extends RecyclerView.Adapter<MapRecy.ViewHolder> {
 
     public static final String LOG_TAG = "navi";
 
@@ -24,28 +24,26 @@ public class SynchroRecy extends RecyclerView.Adapter<SynchroRecy.ViewHolder> {
     /**
      * 外部的点击监听
      */
-    private SynchroRecy.IClickListener clickListener;
+    private MapRecy.IClickListener clickListener;
 
-    public SynchroRecy(SynchroRecy.IClickListener listener) {
+    public MapRecy(MapRecy.IClickListener listener) {
         this.clickListener = listener;
 
         if(mobilityDate.size() != 0)
             mobilityDate.clear();
-        mobilityDate.add("小车平滑与路线擦除");
-        mobilityDate.add("路况线");
-        mobilityDate.add("虚线");
+        mobilityDate.add("地图-罗盘marker");
     }
 
     @NonNull
     @Override
-    public SynchroRecy.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MapRecy.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.main_list_recy_item, parent, false);
-        return new SynchroRecy.ViewHolder(view);
+        return new MapRecy.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SynchroRecy.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MapRecy.ViewHolder holder, int position) {
         String content = mobilityDate.get(position);
         holder.tvContent.setText(content);
 
@@ -60,7 +58,7 @@ public class SynchroRecy extends RecyclerView.Adapter<SynchroRecy.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        SynchroRecy.MyClickListener listener = new SynchroRecy.MyClickListener();
+        MapRecy.MyClickListener listener = new MapRecy.MyClickListener();
 
         LinearLayout allLayout;
         TextView tvContent;
@@ -74,10 +72,10 @@ public class SynchroRecy extends RecyclerView.Adapter<SynchroRecy.ViewHolder> {
 
     class MyClickListener implements View.OnClickListener {
 
-        public WeakReference<SynchroRecy.ViewHolder> wrf;
+        public WeakReference<MapRecy.ViewHolder> wrf;
         public int position;
 
-        public void setViewHolder(SynchroRecy.ViewHolder viewHolder) {
+        public void setViewHolder(MapRecy.ViewHolder viewHolder) {
             wrf = new WeakReference<>(viewHolder);
         }
 
@@ -97,5 +95,4 @@ public class SynchroRecy extends RecyclerView.Adapter<SynchroRecy.ViewHolder> {
         void onClick(int itemPosition);
     }
 }
-
 

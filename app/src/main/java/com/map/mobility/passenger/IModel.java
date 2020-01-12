@@ -21,7 +21,7 @@ public interface IModel {
     /**
      *  取消监听
      */
-    void unregister();
+    void unregister(IPasView view);
 
     /**
      *  改变后的通知

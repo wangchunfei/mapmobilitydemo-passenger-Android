@@ -56,7 +56,6 @@ public class SynchroCarAnima extends SynchroBase {
     boolean eraseAble;
 
     View mView;
-    MapView mapView;
 
     public void start(View view) {
         synchroInit();
@@ -81,14 +80,14 @@ public class SynchroCarAnima extends SynchroBase {
 
     @Override
     View getSychroView() {
-        mView = LayoutInflater.from(this).inflate(R.layout.sychro_car_anima, null);
-        mapView = mView.findViewById(R.id.spot_map);
         return mView;
     }
 
     @Override
-    MapView getMap() {
-        return mapView;
+    protected MapView getMap() {
+        if(mapView == null)
+            mView = LayoutInflater.from(this).inflate(R.layout.sychro_car_anima, null);
+        return mView.findViewById(R.id.spot_map);
     }
 
     @Override
@@ -212,22 +211,6 @@ public class SynchroCarAnima extends SynchroBase {
         if(polyline != null)
             polyline.setPoints(points);
         polyline.setEraseable(eraseAble);
-    }
-
-    /**
-     * 添加marker
-     * @param latLng 经纬度
-     * @param markerId id
-     */
-    private Marker addMarker(LatLng latLng, int markerId, float rotation) {
-        return addMarker(latLng, markerId, rotation, 0.5f, 0.5f);
-    }
-
-    private Marker addMarker(LatLng latLng, int markerId, float rotation, float anchorX, float anchorY) {
-        return mapView.getMap().addMarker(new MarkerOptions(latLng)
-                        .icon(BitmapDescriptorFactory.fromResource(markerId))
-                        .rotation(rotation)
-                        .anchor(anchorX, anchorY));
     }
 
     /**

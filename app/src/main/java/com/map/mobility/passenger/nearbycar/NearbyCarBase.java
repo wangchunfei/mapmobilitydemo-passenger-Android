@@ -209,7 +209,7 @@ public abstract class NearbyCarBase extends BaseActivity implements IPasView {
     protected void onDestroy() {
         super.onDestroy();
         if(loModel != null)
-            loModel.unregister();
+            loModel.unregister(this);
         loModel = null;
     }
 

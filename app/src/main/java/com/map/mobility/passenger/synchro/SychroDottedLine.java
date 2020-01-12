@@ -11,28 +11,35 @@ import com.tencent.map.locussynchro.TencentLocusSynchro;
 import com.tencent.map.locussynchro.model.Order;
 import com.tencent.map.locussynchro.model.RouteUploadError;
 import com.tencent.map.locussynchro.model.SyncData;
-import com.tencent.map.locussynchro.model.TrafficItem;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
+import com.tencent.tencentmap.mapsdk.maps.model.BitmapDescriptorFactory;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 import com.tencent.tencentmap.mapsdk.maps.model.Marker;
 import com.tencent.tencentmap.mapsdk.maps.model.Polyline;
 import com.tencent.tencentmap.mapsdk.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class SychroTraffic extends SynchroBase {
+public class SychroDottedLine extends SynchroBase {
 
     ArrayList<LatLng> points = new ArrayList<>();// 路线点串
 
     Polyline polyline;
     Marker startMarker, endMarker;
 
-    View mView;
+    View view;
 
     public void start(View view) {
         synchroInit();
         startSychro();
+    }
+
+    public void dotLine(View view) {
+        drawLine(0);
+    }
+
+    public void rectLine(View view) {
+        drawLine(1);
     }
 
     public void stop(View view) {
@@ -43,14 +50,14 @@ public class SychroTraffic extends SynchroBase {
 
     @Override
     View getSychroView() {
-        return mView;
+        return view;
     }
 
     @Override
     protected MapView getMap() {
-        if(mView == null)
-            mView = LayoutInflater.from(this).inflate(R.layout.sychro_traffic, null);
-        return mView.findViewById(R.id.spot_map);
+        if(view == null)
+            view = LayoutInflater.from(this).inflate(R.layout.sychro_dotted_line, null);
+        return view.findViewById(R.id.dotted_line_view);
     }
 
     @Override
@@ -82,11 +89,11 @@ public class SychroTraffic extends SynchroBase {
                     return;
                 }
 
-                showRoute(syncData);// 显示路况颜色
-
                 if(points.size() != 0)
                     points.clear();
                 points.addAll(SHelper.transformLatLngs(syncData.getRoute().getRoutePoints()));
+
+                showRoute(syncData);
 
                 if(startMarker == null && endMarker == null && points.size() >= 2) {// 添加起点终点marker
                     startMarker = addMarker(points.get(0), R.mipmap.line_start_point, 0);
@@ -129,84 +136,57 @@ public class SychroTraffic extends SynchroBase {
         };
     }
 
-    /**
-     * 路况颜色
-     */
     private void showRoute(SyncData syncData) {
         if(syncData == null || syncData.getRoute() == null)
             return;
 
-        int width = (int) (10 * getResources().getDisplayMetrics().density + 0.5);
-        ArrayList<TrafficItem> traffics = syncData.getRoute().getTrafficItems();
-        List<LatLng> mRoutePoints = SHelper.transformLatLngs(syncData.getRoute().getRoutePoints());
-        // 点的个数
-        int pointSize = mRoutePoints.size();
-        // 路段总数 三个index是一个路况单元，分别为：路况级别，起点，终点
-        int trafficSize = traffics.size();
-        // 路段index所对应的颜色值数组
-        int[] trafficColors = new int[pointSize];
-        // 路段index数组
-        int[] trafficColorsIndex = new int[pointSize];
-        int pointStart = 0;
-        int pointEnd = 0;
-        int trafficColor = 0;
-        int index = 0;
-        for (int j = 0; j < trafficSize; j++) {
-            pointStart = traffics.get(j).getFromIndex();
-            pointEnd = traffics.get(j).getToIndex();
-            trafficColor = getTrafficColor(traffics.get(j).getTraffic());
-            for (int k = pointStart; k < pointEnd || k == pointSize - 1; k++) {
-                trafficColors[index] = trafficColor;
-                trafficColorsIndex[index] = index;
-                index++;
-            }
-        }
-
-        if(polyline == null) {
-            // 首次调整视图中心点
-            SHelper.fitsWithRoute(mapView.getMap()
-                    , mRoutePoints
-                    , CommentUtils.dip2px(this, 32)
-                    , CommentUtils.dip2px(this, 64)
-                    , CommentUtils.dip2px(this, 32)
-                    , CommentUtils.dip2px(this, 64));
-        }else
+        if(polyline != null)
             polyline.remove();
 
+        // 调整视图中心点
+        SHelper.fitsWithRoute(mapView.getMap()
+                , points
+                , CommentUtils.dip2px(this, 32)
+                , CommentUtils.dip2px(this, 64)
+                , CommentUtils.dip2px(this, 32)
+                , CommentUtils.dip2px(this, 64));
+
+        int width = (int) (10 * getResources().getDisplayMetrics().density + 0.5);
+
         polyline = mapView.getMap().addPolyline(new PolylineOptions()
-                .addAll(mRoutePoints)
+                .addAll(points)
                 .width(width)
-                .arrow(true)
-                .colors(trafficColors, trafficColorsIndex));
+                .color(0xff6cbe89)
+                .arrow(true));
     }
 
-    private int getTrafficColor(int type) {
-        int color = 0xFFFFFFFF;
-        switch (type) {
-            case 0:
-                // 路况标签-畅通
-                // 绿色
-                color = 0xff3EBA79;
-                break;
-            case 1:
-                // 路况标签-缓慢
-                // 黄色
-                color = 0xffF4BB45;
-                break;
-            case 2:
-                // 路况标签-拥堵
-                // 红色
-                color = 0xffE85854;
-                break;
-            case 3:
-                // 路况标签-无路况
-                color = 0xff4F96EE;
-                break;
-            case 4:
-                // 路况标签-特别拥堵（猪肝红）
-                color = 0xffAF333D;
-                break;
+    /**
+     * 绘制虚线
+     * @param type
+     */
+    private void drawLine(int type) {
+        if(polyline == null)
+            return;
+        polyline.remove();
+
+        int width = (int) (10 * getResources().getDisplayMetrics().density + 0.5);
+
+        PolylineOptions options = new PolylineOptions()
+                .addAll(points)
+                .width(width)
+                .color(0xff6cbe89)
+                .arrow(true);
+        if(type == 0) {
+            options.lineType(PolylineOptions.LineType.LINE_TYPE_DOTTEDLINE)// 圆点虚线方法
+                    .colorTexture(BitmapDescriptorFactory.fromResource(R.mipmap.dot_bule_icon));
+        }else if(type == 1) {
+            ArrayList<Integer> l = new ArrayList<>();// 矩形虚线
+            // 虚线的实线部分长度
+            l.add(30);
+            // 虚线的空白部分长度
+            l.add(5);
+            options.pattern(l);
         }
-        return color;
+        polyline = mapView.getMap().addPolyline(options);
     }
 }

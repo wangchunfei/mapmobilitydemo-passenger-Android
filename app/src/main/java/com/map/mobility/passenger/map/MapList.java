@@ -1,4 +1,4 @@
-package com.map.mobility.passenger.synchro;
+package com.map.mobility.passenger.map;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,9 @@ import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.R;
 import com.map.mobility.passenger.utils.ToastUtils;
 
-public class SynchroList extends BaseActivity {
+public class MapList extends BaseActivity {
 
-    static final int TYPE_CAR_ANIMA_ERASE = 0;// 小车平滑和路线擦除
-
-    static final int TYPE_ROUTE_TRAFFIC = 1;// 路况线
-
-    static final int TYPE_DOTTED_LINE = 2;// 虚线
+    static final int TYPE_COMPASS = 0;// 定位罗盘
 
     private RecyclerView recyclerView;
 
@@ -50,7 +46,7 @@ public class SynchroList extends BaseActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
 
-        recyclerView.setAdapter(new SynchroRecy(new SynchroRecy.IClickListener() {
+        recyclerView.setAdapter(new MapRecy(new MapRecy.IClickListener() {
             @Override
             public void onClick(int itemPosition) {
 
@@ -62,14 +58,8 @@ public class SynchroList extends BaseActivity {
 
     private void click(int position) {
         switch (position){
-            case TYPE_CAR_ANIMA_ERASE:
-                toIntent(SynchroCarAnima.class);
-                break;
-            case TYPE_ROUTE_TRAFFIC:
-                toIntent(SychroTraffic.class);
-                break;
-            case TYPE_DOTTED_LINE:
-                toIntent(SychroDottedLine.class);
+            case TYPE_COMPASS :
+                toIntent(MapCompass.class);
                 break;
         }
     }
@@ -78,4 +68,5 @@ public class SynchroList extends BaseActivity {
         Intent intent = new Intent(this, c);
         startActivity(intent);
     }
+
 }

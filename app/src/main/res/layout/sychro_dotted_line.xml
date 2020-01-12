@@ -4,13 +4,13 @@
     android:layout_height="match_parent">
 
     <com.tencent.tencentmap.mapsdk.maps.MapView
-        android:id="@+id/spot_map"
+        android:id="@+id/dotted_line_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
     <Button
-        android:id="@+id/start"
+        android:id="@+id/start_sychro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dip"
@@ -19,12 +19,31 @@
         android:text="开始" />
 
     <Button
-        android:id="@+id/stop"
+        android:id="@+id/dot_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="104dip"
         android:layout_marginLeft="12dip"
+        android:onClick="dotLine"
+        android:text="圆点虚线" />
+
+    <Button
+        android:id="@+id/rect_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="154dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="rectLine"
+        android:text="常规虚线" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="204dip"
+        android:layout_marginLeft="12dip"
         android:onClick="stop"
         android:text="结束" />
+
 
 </RelativeLayout>

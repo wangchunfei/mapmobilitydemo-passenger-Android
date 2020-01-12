@@ -42,8 +42,9 @@ public class PasLocationModel implements IModel {
     }
 
     @Override
-    public void unregister() {
-        views.clear();
+    public void unregister(IPasView view) {
+        if(views != null && views.indexOf(view) != -1)
+            views.remove(view);
     }
 
     public void postChangeLocationEvent() {

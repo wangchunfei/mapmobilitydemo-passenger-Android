@@ -72,6 +72,12 @@
 
         <activity android:name=".synchro.SychroTraffic"/>
 
+        <activity android:name=".map.MapCompass"/>
+
+        <activity android:name=".map.MapList"/>
+
+        <activity android:name=".synchro.SychroDottedLine"/>
+
     </application>
 
 </manifest>

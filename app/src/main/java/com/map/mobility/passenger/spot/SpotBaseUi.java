@@ -22,13 +22,16 @@ public class SpotBaseUi extends SpotBase {
 
     @Override
     View getNearbyCarView() {
-        spotView = LayoutInflater.from(this).inflate(R.layout.pickup_spot_ui, null);
+        if(spotView == null)
+            return null;
         dotPoint = spotView.findViewById(R.id.point_marker);
         return spotView;
     }
 
     @Override
-    MapView getMap() {
+    protected MapView getMap() {
+        if(spotView == null)
+            spotView = LayoutInflater.from(this).inflate(R.layout.pickup_spot_ui, null);
         return spotView.findViewById(R.id.spot_map);
     }
 

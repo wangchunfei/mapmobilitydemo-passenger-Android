@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.R;
+import com.map.mobility.passenger.map.MapList;
 import com.map.mobility.passenger.nearbycar.NearbyCarUi;
 import com.map.mobility.passenger.spot.SpotList;
 import com.map.mobility.passenger.synchro.SynchroList;
@@ -42,6 +43,11 @@ public class MainActivity extends BaseActivity {
      * 司乘同显-乘客端
      */
     static final int S_DISPLAY = 3;
+
+    /**
+     * 检索
+     */
+    static final int SEARCH = 4;
 
     private RecyclerView recyclerView;
 
@@ -103,7 +109,7 @@ public class MainActivity extends BaseActivity {
     private void click(int position) {
         switch (position){
             case MAP_HELPER:
-                ToastUtils.INSTANCE().Toast("待添加");
+                toIntent(MapList.class);
                 break;
             case CAR_PREVIEW:
                 toIntent(NearbyCarUi.class);
@@ -113,6 +119,8 @@ public class MainActivity extends BaseActivity {
                 break;
             case S_DISPLAY:
                 toIntent(SynchroList.class);
+            case SEARCH:
+                ToastUtils.INSTANCE().Toast("待添加");
                 break;
         }
     }

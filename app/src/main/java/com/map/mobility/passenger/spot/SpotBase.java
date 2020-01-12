@@ -5,15 +5,13 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.IModel;
 import com.map.mobility.passenger.IPasView;
+import com.map.mobility.passenger.MapBase;
 import com.map.mobility.passenger.model.PasLocationModel;
 import com.map.mobility.passenger.location.bean.MapLocation;
 import com.tencent.recommendspot.TMMRecommendedBoardManager;
 import com.tencent.recommendspot.recospot.bean.TMMLatlng;
-import com.tencent.tencentmap.mapsdk.maps.CameraUpdate;
-import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
 import com.tencent.tencentmap.mapsdk.maps.model.CameraPosition;
@@ -25,25 +23,19 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
  * @author mjzuo
  * @since 20/01/06
  */
-public abstract class SpotBase extends BaseActivity implements IPasView {
+public abstract class SpotBase extends MapBase implements IPasView {
 
     static final String LOG_TAG = "tag1234";
 
     PasLocationModel loModel;// 定位
 
     TMMRecommendedBoardManager spotManager;
-    TencentMap tencentMap;
-
-    MapView mapView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(getNearbyCarView());
-
-        mapView = getMap();
-        tencentMap = mapView.getMap();
 
         initSpot();
         getLocation();
@@ -98,7 +90,7 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
 
     abstract View getNearbyCarView();
 
-    abstract MapView getMap();
+    protected abstract MapView getMap();
 
     abstract void handleSpot();
 
@@ -134,10 +126,12 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
     protected void onDestroy() {
         super.onDestroy();
         if(loModel != null)
-            loModel.unregister();
+            loModel.unregister(this);
         loModel = null;
         if(spotManager != null)
             spotManager.destory();
+        if(mapView != null)
+            mapView.onDestroy();
     }
 
     private boolean checkTencentMap() {
@@ -172,14 +166,5 @@ public abstract class SpotBase extends BaseActivity implements IPasView {
                 spotManager.onCameraChangeFinish(cameraPosition);
             }
         });
-    }
-
-    /**
-     * 设置地图的中心点坐标
-     */
-    private void setPoi(LatLng latLng) {
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition
-                (latLng, 16, 0f, 0));
-        tencentMap.moveCamera(cameraUpdate);
     }
 }
