@@ -32,6 +32,7 @@ public class MapRecy extends RecyclerView.Adapter<MapRecy.ViewHolder> {
         if(mobilityDate.size() != 0)
             mobilityDate.clear();
         mobilityDate.add("地图-罗盘marker");
+        mobilityDate.add("地图-罗盘UiSettings");
     }
 
     @NonNull

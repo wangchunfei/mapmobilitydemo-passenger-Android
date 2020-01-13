@@ -40,6 +40,7 @@ public class MainRecycler extends RecyclerView.Adapter<MainRecycler.ViewHolder> 
         mobilityDate.add("周边车辆");
         mobilityDate.add("上车点");
         mobilityDate.add("司乘同显-乘客端");
+        mobilityDate.add("检索");
     }
 
     @NonNull

@@ -47,6 +47,12 @@ public class PasLocationModel implements IModel {
             views.remove(view);
     }
 
+    public void stopLocation() {
+        // 结束定位
+        locationManager.stopLocation();
+        locationManager = null;
+    }
+
     public void postChangeLocationEvent() {
         if(locationManager == null){
             initLocation();
@@ -70,8 +76,6 @@ public class PasLocationModel implements IModel {
             // 定位更新后，通知view
             mapLocation = location;
             onChangeEvent(IModel.LOCATION);
-            // 不需要实时定位
-            stopLocation();
         }
 
         @Override
@@ -91,12 +95,6 @@ public class PasLocationModel implements IModel {
     private void startLocation() {
         // 开始定位
         locationManager.startLocation();
-    }
-
-    private void stopLocation() {
-        // 结束定位
-        locationManager.stopLocation();
-        locationManager = null;
     }
 }
 

@@ -12,7 +12,8 @@ import com.map.mobility.passenger.utils.ToastUtils;
 
 public class MapList extends BaseActivity {
 
-    static final int TYPE_COMPASS = 0;// 定位罗盘
+    static final int TYPE_COMPASS = 0;// 定位罗盘by marker
+    static final int TYPE_COMPASS_SETTING = 1;// 罗盘by ui setting
 
     private RecyclerView recyclerView;
 
@@ -60,6 +61,9 @@ public class MapList extends BaseActivity {
         switch (position){
             case TYPE_COMPASS :
                 toIntent(MapCompass.class);
+                break;
+            case TYPE_COMPASS_SETTING:
+                toIntent(MapCompassBySetting.class);
                 break;
         }
     }

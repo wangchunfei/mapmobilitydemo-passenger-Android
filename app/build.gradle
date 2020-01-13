@@ -38,7 +38,7 @@ dependencies {
     // 司乘
     implementation files('libs/tencentlocussynchrosdk-release.aar')
     // 推荐上车点
-    implementation files('libs/pickupspot_1.0.0.2.aar')
+    implementation files('libs/pickupspot_1.0.0.3.aar')
     // 周边车辆
     implementation files('libs/tencentcarpreview_1.0.0.2.aar')
     // 检索sdk

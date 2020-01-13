@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tencent.tencentmap.mapsdk.maps.MapView
+        android:id="@+id/map_compass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <Button
+        android:id="@+id/show_compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="showCompass"
+        android:text="显示" />
+
+    <Button
+        android:id="@+id/hide_compass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dip"
+        android:layout_marginLeft="12dip"
+        android:onClick="hideCompass"
+        android:text="隐藏" />
+
+</RelativeLayout>

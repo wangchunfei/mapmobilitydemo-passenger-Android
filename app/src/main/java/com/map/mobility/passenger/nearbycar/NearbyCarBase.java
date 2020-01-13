@@ -52,8 +52,9 @@ public abstract class NearbyCarBase extends BaseActivity implements IPasView {
                  * 获取周边车辆
                  */
                 if(obj instanceof MapLocation && carManager != null) {
+                    if(loModel != null)
+                        loModel.stopLocation();
                     try {
-
                         carManager.setCurrentLatLng(new LatLng(((MapLocation) obj).getLatitude()
                                 , ((MapLocation) obj).getLongitude()));
                     } catch (Exception e) {

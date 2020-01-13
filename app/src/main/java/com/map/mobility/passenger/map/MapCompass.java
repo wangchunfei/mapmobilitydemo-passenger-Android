@@ -14,7 +14,7 @@ import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 import com.tencent.tencentmap.mapsdk.maps.model.Marker;
 
 /**
- * 罗盘
+ * 罗盘by marker
  *
  * @author mjzuo
  */
@@ -37,6 +37,8 @@ public class MapCompass extends TMapBase implements IPasView {
                     lastLatlng = new LatLng(((MapLocation) obj).getLatitude(), ((MapLocation) obj).getLongitude());
                     setPoi(lastLatlng);
                     addCompassMarker();
+                    if(loModel != null)
+                        loModel.stopLocation();
                 }
                 break;
         }

@@ -53,13 +53,10 @@ public abstract class SpotBase extends MapBase implements IPasView {
                  * 不需要重复调用 getRecommendSpot 方法
                  */
                 if(obj instanceof MapLocation && tencentMap != null) {
-                    try {
-
-                        setPoi(new LatLng(((MapLocation) obj).getLatitude()
-                                , ((MapLocation) obj).getLongitude()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    if(loModel != null)
+                        loModel.stopLocation();
+                    setPoi(new LatLng(((MapLocation) obj).getLatitude()
+                            , ((MapLocation) obj).getLongitude()));
                 }
                 break;
         }
