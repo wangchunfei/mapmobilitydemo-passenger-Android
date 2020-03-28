@@ -1,20 +1,18 @@
-package com.map.mobility.passenger.helper;
+package com.map.mobility.passenger.synchro_v2.helper;
 
 import android.os.Handler;
 
-import com.tencent.map.locussynchro.model.SynchroLocation;
+import com.tencent.map.lssupport.bean.TLSBDriverPosition;
+import com.tencent.map.lssupport.bean.TLSBWayPoint;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SHelper {
-
-    private SHelper(){}
 
     /**
      * 缩放至整条路线都在可视区域内
@@ -48,74 +46,40 @@ public class SHelper {
     }
 
     /**
-     *  latlng的转换
-     * @param list
+     * 获取点串第一个吸附成功的点
      */
-    public static ArrayList<com.tencent.tencentmap.mapsdk.maps.model.LatLng>
-            transformLatLngs(ArrayList<com.tencent.map.locussynchro.model.LatLng> list) {
-        if(list == null){
+    public static TLSBDriverPosition getFirsttLocation(ArrayList<TLSBDriverPosition> locations) {
+        if(locations == null || locations.size() == 0)
             return null;
+        for(TLSBDriverPosition location : locations) {
+            if(location.getPointIndex() != -1)
+                return location;
         }
-        ArrayList<com.tencent.tencentmap.mapsdk.maps.model.LatLng> latLngs = new ArrayList<>();
-        for(com.tencent.map.locussynchro.model.LatLng lstlng : list) {
-            latLngs.add(new com.tencent.tencentmap.mapsdk.maps.model.LatLng
-                    (lstlng.getLatitude(), lstlng.getLongitude()));
-        }
-        return latLngs;
+        return null;
     }
 
     /**
      *  获取小车平滑需要的点串信息
      * @param locations
      */
-    public static com.tencent.tencentmap.mapsdk.maps.model.LatLng[]
-                getLatLngsBySynchroLocation(ArrayList<SynchroLocation> locations) {
+    public static LatLng[] getLatLngsBySynchroLocation(ArrayList<TLSBDriverPosition> locations) {
         if(locations == null){
             return null;
         }
-        for(int i=locations.size() - 1; i >= 0; i --) {
-            SynchroLocation l = locations.get(i);
+        for(int i = locations.size() - 1; i >= 0; i --) {
+            TLSBDriverPosition l = locations.get(i);
             // 剔除掉吸附失败的点，会造成角度偏差
-            if(l.getAttachedIndex() == -1){
+            if(l.getPointIndex() == -1){
                 locations.remove(i);
             }
         }
         int size = locations.size();
-        com.tencent.tencentmap.mapsdk.maps.model.LatLng[] latLngs =
-                new com.tencent.tencentmap.mapsdk.maps.model.LatLng[size];
+        LatLng[] latLngs = new LatLng[size];
         for(int i = 0; i < size; i ++) {
-            latLngs[i] = new com.tencent.tencentmap.mapsdk.maps.model.LatLng
-                    (locations.get(i).getAttachedLatitude()
-                            , locations.get(i).getAttachedLongitude());
+            latLngs[i] = new LatLng(locations.get(i).getAttachLat()
+                            , locations.get(i).getAttachLng());
         }
         return latLngs;
-    }
-
-    /**
-     * 获取点串第一个吸附成功的点
-     */
-    public static SynchroLocation getFirsttLocation(ArrayList<SynchroLocation> locations) {
-        if(locations == null || locations.size() == 0)
-            return null;
-        for(SynchroLocation location : locations) {
-            if(location.getAttachedIndex() != -1)
-                return location;
-        }
-        return null;
-    }
-
-    /**
-     * 获取点串最后吸附成功的点
-     */
-    public static SynchroLocation getLastLocation(ArrayList<SynchroLocation> locations) {
-        if(locations == null || locations.size() == 0)
-            return null;
-        Collections.reverse(locations);
-        for(SynchroLocation location : locations) {
-            if(location.getAttachedIndex() != -1)
-                return location;
-        }
-        return null;
     }
 
     /**
@@ -129,5 +93,25 @@ public class SHelper {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 途经点排序
+     */
+    public static ArrayList<TLSBWayPoint> sortWayPoints(ArrayList<TLSBWayPoint> wayPoints) {
+        ArrayList<TLSBWayPoint> ways = new ArrayList<>();
+        while (wayPoints.size() != 0) {
+            TLSBWayPoint wayPoint = wayPoints.get(0);
+            for(int index = 1; index < wayPoints.size(); index ++) {
+                if(wayPoints.get(index).getPassengerOrderId().equals(wayPoint.getPassengerOrderId())) {
+                    ways.add(wayPoints.get(0));
+                    ways.get(index);
+                    wayPoints.remove(index);
+                    wayPoints.remove(0);
+                    break;
+                }
+            }
+        }
+        return ways;
     }
 }

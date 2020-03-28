@@ -31,23 +31,22 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // 腾讯地图sdk
-    implementation 'com.tencent.map:sdk-compat-v4:4.2.9'
-    implementation 'com.tencent.map:tencent-map-vector-sdk:4.2.9'
+    implementation 'com.tencent.map:tencent-map-vector-sdk:4.3.2'
     // 定位
-    implementation files('libs/TencentLocationSDK_v8.4.7_rdb41b51d_20190906_163315_release.jar')
-    // 司乘
-    implementation files('libs/tencentlocussynchrosdk-release.aar')
+    implementation files('libs/TencentLocationSDK_v8.4.14_ra0311232_20200103_125837_release.aar')
+    // 司乘同显乘客端
+    implementation files('libs/lspassenger_v2.0.0.aar')
+    implementation files('libs/lssupport_v2.0.0.aar')
     // 推荐上车点
     implementation files('libs/pickupspot_1.0.0.3.aar')
     // 周边车辆
     implementation files('libs/tencentcarpreview_1.0.0.2.aar')
     // 检索sdk
-    implementation('com.tencent.map:tencent-navi-search:1.0.0.2') { exclude group: 'com.android.support' }
+    implementation('com.tencent.map:tencent-navi-search:1.0.0.3') { exclude group: 'com.android.support' }
     // 基础库
-    implementation 'com.tencent.map:tencent-map-nav-surport:1.0.2.1'
+    implementation 'com.tencent.map:tencent-map-nav-surport:1.0.2.3'
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-
     // 沉浸式状态栏
     implementation 'com.gyf.immersionbar:immersionbar:2.3.1'
 }

@@ -39,7 +39,7 @@ public class MainRecycler extends RecyclerView.Adapter<MainRecycler.ViewHolder> 
         mobilityDate.add("地图");
         mobilityDate.add("周边车辆");
         mobilityDate.add("上车点");
-        mobilityDate.add("司乘同显-乘客端");
+        mobilityDate.add("司乘同显v2.0+");
         mobilityDate.add("检索");
     }
 

@@ -3,10 +3,13 @@ package com.map.mobility.passenger.utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.tencent.map.lssupport.util.StringUtils;
+
 public class ToastUtils {
 
-    private Context mContext;
     private static ToastUtils mToast;
+    static Context mContext;
+
     private ToastUtils(){}
 
     public static ToastUtils INSTANCE() {
@@ -20,8 +23,8 @@ public class ToastUtils {
         return mToast;
     }
 
-    public void init(Context context) {
-        mContext = context;
+    public static void init(Context applicationContext) {
+        mContext = applicationContext;
     }
 
     public void destory() {
@@ -30,7 +33,7 @@ public class ToastUtils {
     }
 
     public void Toast(String msg) {
-        if(StringUtils.isJudgeEmpty(msg) && mContext != null){
+        if(!StringUtils.isEmpty(msg) && mContext != null){
             Toast.makeText(mContext.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
         }
     }

@@ -14,7 +14,7 @@ import com.map.mobility.passenger.R;
 import com.map.mobility.passenger.map.MapList;
 import com.map.mobility.passenger.nearbycar.NearbyCarUi;
 import com.map.mobility.passenger.spot.SpotList;
-import com.map.mobility.passenger.synchro.SynchroList;
+import com.map.mobility.passenger.synchro_v2.psg.PsgActivity;
 import com.map.mobility.passenger.utils.ToastUtils;
 
 /**
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
     static final int CAR_POI = 2;
 
     /**
-     * 司乘同显-乘客端
+     * 司乘v2.0+
      */
     static final int S_DISPLAY = 3;
 
@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity {
                 toIntent(SpotList.class);
                 break;
             case S_DISPLAY:
-                toIntent(SynchroList.class);
+                toIntent(PsgActivity.class);
             case SEARCH:
                 ToastUtils.INSTANCE().Toast("待添加");
                 break;

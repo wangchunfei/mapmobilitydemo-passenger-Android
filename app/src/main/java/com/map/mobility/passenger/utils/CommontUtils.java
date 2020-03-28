@@ -1,8 +1,10 @@
 package com.map.mobility.passenger.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
-public class CommentUtils {
+public class CommontUtils {
 
     /**
      *  根据手机的分辨率从 dp 的单位 转成为 px(像素)
@@ -18,5 +20,10 @@ public class CommentUtils {
     public static int sp2px(Context context,float spValue){
         float fontScale=context.getApplicationContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue*fontScale+0.5f);
+    }
+
+    public static void toIntent(Activity a, Class c) {
+        Intent intent = new Intent(a, c);
+        a.startActivity(intent);
     }
 }

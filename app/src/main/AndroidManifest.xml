@@ -31,20 +31,24 @@
             android:value="xxx" />
         <!-- 司乘同显的key-->
         <meta-data
-            android:name="com.tencent.map.locussynchro.api_key"
+            android:name="com.tencent.map.ls.api_key"
             android:value="xxx" />
+
+        <!-- 也只需注册com.tencent.map.recospot.api_key一个即可，大型枢纽的key默认会使用这个 -->
         <meta-data
             android:name="com.tencent.map.carpreview.api_key"
-            android:value="xxx" /> <!-- 也只需注册com.tencent.map.recospot.api_key，大型枢纽的key默认会使用这个 -->
+            android:value="xxx" />
         <meta-data
             android:name="com.tencent.map.recospot.api_key"
             android:value="xxx" />
         <meta-data
             android:name="com.tencent.map.subhub.api.key"
             android:value="xxx" />
+
+        <!-- 也只需注册 com.tencent.map.geo.api.key，逆地理编码默认会使用这个 -->
         <meta-data
             android:name="com.tencent.map.hub.api.key"
-            android:value="xxx" /> <!-- 也只需注册 com.tencent.map.geo.api.key，逆地理编码默认会使用这个 -->
+            android:value="xxx" />
         <meta-data
             android:name="com.tencent.map.geo.api.key"
             android:value="xxx" />
@@ -77,6 +81,10 @@
         <activity android:name=".map.MapList"/>
 
         <activity android:name=".synchro.SychroDottedLine"/>
+
+        <activity android:name=".synchro_v2.psg.PsgActivity"/>
+
+        <activity android:name=".map.MapCompassBySetting"/>
 
     </application>
 
