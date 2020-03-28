@@ -1,5 +1,6 @@
 package com.map.mobility.passenger.synchro;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -204,13 +205,15 @@ public class SynchroCarAnima extends SynchroBase {
                 (new PolylineOptions()
                         .latLngs(points)
                         .color(0xff6cbe89)
-                        .arrow(true));
+                        .arrow(true)
+                        .eraseColor(0x00000000));
     }
 
     private void showPolyline() {
-        if(polyline != null)
+        if(polyline != null) {
             polyline.setPoints(points);
-        polyline.setEraseable(eraseAble);
+            polyline.setEraseable(eraseAble);
+        }
     }
 
     /**
