@@ -38,22 +38,10 @@
         <meta-data
             android:name="com.tencent.map.carpreview.api_key"
             android:value="xxx" />
-        <meta-data
-            android:name="com.tencent.map.recospot.api_key"
-            android:value="xxx" />
-        <meta-data
-            android:name="com.tencent.map.subhub.api.key"
-            android:value="xxx" />
 
         <!-- 也只需注册 com.tencent.map.geo.api.key，逆地理编码默认会使用这个 -->
         <meta-data
             android:name="com.tencent.map.hub.api.key"
-            android:value="xxx" />
-        <meta-data
-            android:name="com.tencent.map.geo.api.key"
-            android:value="xxx" />
-        <meta-data
-            android:name="com.tencent.map.regeo.api.key"
             android:value="xxx" />
 
         <activity android:name=".mainlist.MainActivity">
@@ -70,21 +58,15 @@
 
         <activity android:name=".spot.SpotBaseUi"/>
 
-        <activity android:name=".synchro.SynchroCarAnima"/>
-
-        <activity android:name=".synchro.SynchroList"/>
-
-        <activity android:name=".synchro.SychroTraffic"/>
-
         <activity android:name=".map.MapCompass"/>
 
         <activity android:name=".map.MapList"/>
 
-        <activity android:name=".synchro.SychroDottedLine"/>
-
         <activity android:name=".synchro_v2.psg.PsgActivity"/>
 
         <activity android:name=".map.MapCompassBySetting"/>
+
+        <activity android:name=".search.SearchActivity"/>
 
     </application>
 

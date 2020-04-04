@@ -13,6 +13,7 @@ import com.map.mobility.passenger.BaseActivity;
 import com.map.mobility.passenger.R;
 import com.map.mobility.passenger.map.MapList;
 import com.map.mobility.passenger.nearbycar.NearbyCarUi;
+import com.map.mobility.passenger.search.SearchActivity;
 import com.map.mobility.passenger.spot.SpotList;
 import com.map.mobility.passenger.synchro_v2.psg.PsgActivity;
 import com.map.mobility.passenger.utils.ToastUtils;
@@ -79,7 +80,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        ToastUtils.INSTANCE().init(this);
+        ToastUtils.INSTANCE().init(getApplicationContext());
     }
 
     @Override
@@ -120,7 +121,7 @@ public class MainActivity extends BaseActivity {
             case S_DISPLAY:
                 toIntent(PsgActivity.class);
             case SEARCH:
-                ToastUtils.INSTANCE().Toast("待添加");
+                toIntent(SearchActivity.class);
                 break;
         }
     }
