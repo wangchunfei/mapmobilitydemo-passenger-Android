@@ -10,3 +10,9 @@ https://github.com/tentcentmap-mobility/mapmobilitydemo-passenger-Android/blob/m
 
 https://github.com/tentcentmap-mobility/mapmobilitydemo-passenger-Android/blob/master/app/src/main/assets/readme/%E6%8E%A8%E8%8D%90%E4%B8%8A%E8%BD%A6%E7%82%B9.md
 
+### 检索sdk
+
+检索sdk为用户提供了sug检索、逆地理编码、驾车路线检索、步行路线检索功能。
+
+https://github.com/tentcentmap-mobility/mapmobilitydemo-passenger-Android/blob/master/app/src/main/assets/readme/%E6%A3%80%E7%B4%A2.md
+
