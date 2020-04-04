@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/sug_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sug检索"
+        android:padding="5dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginLeft="24dp"
+        android:onClick="sugSearch"
+        />
+
+    <Button
+        android:id="@+id/re_geo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="逆地理"
+        android:padding="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@id/sug_btn"
+        android:layout_marginTop="8dp"
+        android:onClick="reGroSearch"
+        />
+
+    <Button
+        android:id="@+id/route_drive_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="驾车"
+        android:padding="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@id/re_geo_btn"
+        android:layout_marginTop="8dp"
+        android:onClick="routeDriSearch"
+        />
+
+    <Button
+        android:id="@+id/route_walk_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="步行"
+        android:padding="5dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@id/route_drive_btn"
+        android:layout_marginTop="8dp"
+        android:onClick="routeWalkSearch"
+        />
+
+</RelativeLayout>
