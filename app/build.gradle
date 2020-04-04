@@ -42,7 +42,7 @@ dependencies {
     // 周边车辆
     implementation files('libs/tencentcarpreview_v1.0.3_map_4.3.3.3.aar')
     // 检索sdk
-    implementation 'com.tencent.map:tencent-navi-search:1.1.0'
+    implementation 'com.tencent.map:tencent-navi-search:1.1.0-SNAPSHOT'
     // 基础库
     implementation 'com.tencent.map:tencent-map-nav-surport:1.0.2.3'
 
