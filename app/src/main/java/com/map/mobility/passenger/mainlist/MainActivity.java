@@ -120,6 +120,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case S_DISPLAY:
                 toIntent(PsgActivity.class);
+                break;
             case SEARCH:
                 toIntent(SearchActivity.class);
                 break;

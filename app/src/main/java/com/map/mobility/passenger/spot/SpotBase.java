@@ -10,6 +10,7 @@ import com.map.mobility.passenger.IPasView;
 import com.map.mobility.passenger.MapBase;
 import com.map.mobility.passenger.model.PasLocationModel;
 import com.map.mobility.passenger.location.bean.MapLocation;
+import com.tencent.recommendspot.TMMRBDataManager;
 import com.tencent.recommendspot.TMMRecommendedBoardManager;
 import com.tencent.recommendspot.recospot.bean.TMMLatlng;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
@@ -141,7 +142,9 @@ public abstract class SpotBase extends MapBase implements IPasView {
     private void initSpot() {
 
         spotManager = new TMMRecommendedBoardManager(tencentMap);
-        TMMRecommendedBoardManager.mContext = this;
+        TMMRecommendedBoardManager.mContext = getApplicationContext();
+
+        TMMRBDataManager.initSearchKey("检索key", "检索snKey");
 
         spotManager.getManagerConfig()
                 .isRecommendSpotDefaultUI(true)// 使用默认上车点view
